@@ -5,48 +5,10 @@ package Solution
 
 import (
 	"container/list"
-	"fmt"
-	"strings"
+	"list_node"
 )
 
-type ListNode struct {
-	Val  int
-	Next *ListNode
-}
-
-func CreateFromSlice(items []int)  *ListNode {
-	if len(items) == 0 {
-		return nil
-	}
-
-	head := &ListNode{
-		Val: items[0],
-		Next: nil,
-	}
-	cur := head
-	for _, item := range items[1:] {
-		cur.Next = &ListNode{
-			Val: item,
-			Next: nil,
-		}
-		cur = cur.Next
-	}
-
-	return head
-}
-
-func (list *ListNode) String() string {
-	var b strings.Builder
-	cur := list
-	for cur != nil {
-		b.WriteString(fmt.Sprintf("%d", cur.Val))
-		cur = cur.Next
-	}
-
-	return b.String()
-}
-
-func ReorderListWithStack(head *ListNode) {
+func ReorderListWithStack(head *list_node.ListNode) {
 	if head == nil {
 		return
 	}
@@ -66,7 +28,7 @@ func ReorderListWithStack(head *ListNode) {
 		slow = slow.Next
 	}
 
-	var cur *ListNode
+	var cur *list_node.ListNode
     stackTop := stack.Back()
 	if size %2 != 0 {
 		cur = slow
@@ -76,16 +38,16 @@ func ReorderListWithStack(head *ListNode) {
 	for stackTop != nil {
 		next := slow.Next
 		slow.Next = cur
-		cur = stackTop.Value.(*ListNode)
+		cur = stackTop.Value.(*list_node.ListNode)
         stackTop = stackTop.Prev()
 		cur.Next = slow
 		slow = next
 	}
 }
 
-func reverseList(head *ListNode) *ListNode {
+func reverseList(head *list_node.ListNode) *list_node.ListNode {
 	cur := head
-	var prev *ListNode
+	var prev *list_node.ListNode
 	for cur != nil {
 		temp := cur.Next
 		cur.Next = prev
@@ -96,7 +58,7 @@ func reverseList(head *ListNode) *ListNode {
 	return prev
 }
 
-func ReorderListWithoutSpace(head *ListNode) {
+func ReorderListWithoutSpace(head *list_node.ListNode) {
 	if head == nil {
 		return
 	}
@@ -104,7 +66,7 @@ func ReorderListWithoutSpace(head *ListNode) {
 	fast := head
 	slow := head
     size := 0
-    var lastElementOfFirstHalf *ListNode
+    var lastElementOfFirstHalf *list_node.ListNode
 	for fast != nil {
         size += 1
 		fast = fast.Next
