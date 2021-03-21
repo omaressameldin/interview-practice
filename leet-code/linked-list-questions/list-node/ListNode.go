@@ -33,7 +33,7 @@ func CreateFromSlice(items []int) *ListNode {
 
 func (list *ListNode) String() string {
 	if list == nil {
-		return ""
+		return "NONE"
 	}
 
 	var b strings.Builder
