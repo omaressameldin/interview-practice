@@ -25,7 +25,7 @@ func matchClosingBracketWithTop(closingBracket rune, openBracketsStack *list.Lis
 func isValid(brackets string) bool {
 	openBracketsStack := list.New()
 	for _, bracket := range brackets {
-		if bracketsMap[bracket] != 0 {
+		if _, ok := bracketsMap[bracket]; ok {
 			openBracketsStack.PushFront(bracket)
 		} else if !matchClosingBracketWithTop(bracket, openBracketsStack) {
 			return false
